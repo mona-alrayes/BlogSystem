@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('sub_category_id')->constrained('sub_categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('status')->default('draft'); // draft, published, archived , pending
