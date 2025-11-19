@@ -3,15 +3,17 @@
 namespace App\Http\Requests\V1\Comment;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class storeCommentRequest extends FormRequest
+
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +24,7 @@ class storeCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'body' => 'required|string|min:3|max:2000',
         ];
     }
 }

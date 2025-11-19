@@ -14,6 +14,18 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+            'sub_categories' => $this->whenLoaded('subCategories', function () {
+                return $this->subCategories->map(function ($sub) {
+                    return [
+                        'name' => $sub->name,
+                    ];
+                })->values();
+            }),
+            'created_at' => $this->created_at?->toDateTimeString(),
+            'updated_at' => $this->updated_at?->toDateTimeString(),
+        ];
     }
 }

@@ -1,17 +1,18 @@
-<?php
+﻿<?php
 
 namespace App\Http\Requests\V1\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class storeCategoryRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,8 @@ class storeCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'min:3', 'max:255', Rule::unique('categories', 'name')],
+            'description' => 'sometimes|nullable|string|min:5|max:2000',
         ];
     }
 }
