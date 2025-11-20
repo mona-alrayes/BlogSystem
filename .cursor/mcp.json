@@ -6,6 +6,15 @@
                 "artisan",
                 "boost:mcp"
             ]
+        },
+        "herd": {
+            "command": "php",
+            "args": [
+                "C:/Users/ASUS/.config/herd/bin/herd-mcp.phar"
+            ],
+            "env": {
+                "SITE_PATH": "C:\\Users\\ASUS\\Desktop\\BlogSystem"
+            }
         }
     }
 }
