@@ -25,6 +25,7 @@ class AuthService
     public function register(array $data)
     {
         $user = User::create($data);
+        $user->assignRole('user');
 
         try {
             $token = JWTAuth::fromUser($user);

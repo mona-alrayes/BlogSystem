@@ -3,6 +3,8 @@
 namespace App\Http\Requests\V1\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -11,7 +13,12 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::id() == $this->post->user_id;
+    }
+    
+    public function failedAuthorization()
+    {
+        throw new AccessDeniedHttpException('You are not the author of this post');
     }
 
     /**

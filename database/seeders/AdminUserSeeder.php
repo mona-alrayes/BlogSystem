@@ -22,6 +22,11 @@ class AdminUserSeeder extends Seeder
             ['name' => 'admin', 'guard_name' => 'api']
         );
 
+        //create user role if it doesn't exist
+        $userRole = Role::firstOrCreate(
+            ['name' => 'user', 'guard_name' => 'api'],
+            ['name' => 'user', 'guard_name' => 'api']
+        );
         // Create admin user
         $adminUser = User::create([
             'name' => 'Admin User',
@@ -31,5 +36,6 @@ class AdminUserSeeder extends Seeder
 
         // Assign admin role to user
         $adminUser->assignRole($adminRole);
+        
     }
 }
